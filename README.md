@@ -1,4 +1,4 @@
 vlc-control-node
 ================
 
-Control your VLC with Node. JS with a wrapper
+Module for Node. JS to control your VLC with a wrapper
