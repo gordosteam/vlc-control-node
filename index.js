@@ -18,7 +18,7 @@ function getOptions(path) {
 	return {
 		host : ipServer,
 		port : portServer,
-		path : path,
+		path : '/requests/status.json?command='+ path,
 		method : 'GET',
 		auth: user + ':' + password,
 		headers : {
@@ -68,17 +68,38 @@ function request(options) {
 	};
 	this.addAndStart = function(uri, noaudio, novideo) {
 		if (noaudio)
-			var options = getOptions('/requests/status.json?command=in_play&input=' + uri + '&option=noaudio');
+			var options = getOptions('in_play&input=' + uri + '&option=noaudio');
 		else if (novideo)
-			var options = getOptions('/requests/status.json?command=in_play&input=' + uri + '&option=novideo');
+			var options = getOptions('in_play&input=' + uri + '&option=novideo');
 		else
-			var options = getOptions('/requests/status.json?command=in_play&input=' + uri);
-		console.log(request(options));
+			var options = getOptions('in_play&input=' + uri);
+		return request(options);
 	};
 
 	this.addToPlaylist = function(uri) {
-		var options = getOptions("/requests/status.json?command=in_enqueue&input=" + uri);
-		console.log(request(options));
+		var options = getOptions("in_enqueue&input=" + uri);
+		return request(options);
+	};
+	
+	this.play = function(id) {
+		if (id) 
+		  var options = getOptions('pl_play&id=' + id);
+		else 
+		  var options = getOptions('pl_play');
+		return request(options);
+	};
+	
+	this.pause = function(id) {
+		if (id) 
+		  var options = getOptions('pl_pause&id=' + id);
+		else 
+		  var options = getOptions('pl_pause');
+		return request(options);
+	};
+	
+	this.forceResume = function() {
+		var options = getOptions('pl_forceresume');
+		return request(options);
 	};
 
 }).call(vlcControl);
