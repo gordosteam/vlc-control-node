@@ -36,13 +36,13 @@ function request(options) {
 		res.setEncoding('utf8');
 
 		res.on('data', function(chunk) {
-			console.log(chunk);
+			//console.log(chunk);
 			output += chunk;
 		});
 
 		res.on('end', function() {
 			try {
-				console.log(output);
+				//console.log(output);
 				return JSON.parse(output);
 			} catch (err) {
 				console.error(err.stack);
@@ -101,5 +101,32 @@ function request(options) {
 		var options = getOptions('pl_forceresume');
 		return request(options);
 	};
+	
+	this.forcePause = function() {
+		var options = getOptions('pl_forcepause');
+		return request(options);
+	};
+	
+	this.stop = function() {
+		var options = getOptions('pl_stop');
+		return request(options);
+	};
+	
+	this.next = function() {
+		var options = getOptions('pl_next');
+		return request(options);
+	};
+	
+	this.previous = function() {
+		var options = getOptions('pl_previous');
+		return request(options);
+	};
+	
+	this.delete = function(id) {
+		var options = getOptions('pl_delete&id=' + id);
+		return request(options);
+	};
+	
+	  
 
 }).call(vlcControl);
