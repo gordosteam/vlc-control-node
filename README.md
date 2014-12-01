@@ -4,12 +4,13 @@ vlc-control-node
 Module for Node. JS to control your VLC with a wrapper
 
 ## Installation
+TODO: Add to NPM
 ```javascript
   npm install vlc-control-node --save
 ```
 
 ## Usage
-**Note:** the module must be [installed](#Installation) before use.
+**Note:** the module must be **installed** before use.
 
 ```javascript
 var vlccontrol = require("vlc-control-node");
