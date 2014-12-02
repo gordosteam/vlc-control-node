@@ -5,6 +5,9 @@ var url = require('url');
 var vlccontrol = require('../index');
 
 http.createServer(function (req, res) {
+	console.log('**********************');    
+    console.log(' ');
+        
     console.log('server Start!');
     
     vlccontrol.init({ip:'192.168.1.7', port:8080, user:'', password:'asd123'});
