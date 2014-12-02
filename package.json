@@ -1,6 +1,6 @@
 {
   "name": "vlc-control-node",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "Module for Node. JS to control your VLC with a wrapper",
   "main": "index.js",
   "scripts": {

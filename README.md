@@ -6,7 +6,6 @@ Module for Node. JS to control your VLC with a wrapper
 [![NPM](https://nodei.co/npm/vlc-control-node.png?downloads=true&downloadRank=true)](https://nodei.co/npm/vlc-control-node/)
 
 ## Installation
-TODO: Add to NPM
 ```javascript
   npm install vlc-control-node --save
 ```
@@ -34,3 +33,4 @@ Add unit tests for any new or changed functionality. Lint and test your code.
 ## Release History
 
 * 0.0.1 Initial release
+* 0.0.2 Added functions empty,rate,aspectRatio,sort,random,loop,repeat,fullscreen,setVolume

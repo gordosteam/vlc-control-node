@@ -126,5 +126,50 @@ function request(options) {
 		var options = getOptions('pl_delete&id=' + id);
 		return request(options);
 	};
+	
+	this.empty = function() {
+		var options = getOptions('pl_empty');
+		return request(options);
+	};
+	
+	this.rate = function(rate) {
+		var options = getOptions('rate&val=' + rate);
+		return request(options);
+	};
+	
+	this.aspectRatio = function(ar) {
+		var options = getOptions('aspectratio&val=' + ar);
+		return request(options);
+	};
+	
+	this.sort = function(id,val) {
+		var options = getOptions('pl_sort&id='+ id + '&val=' + val);
+		return request(options);
+	};
+	
+	this.random = function() {
+		var options = getOptions('pl_random');
+		return request(options);
+	};
+	
+	this.loop = function() {
+		var options = getOptions('pl_loop');
+		return request(options);
+	};
+	
+	this.repeat = function() {
+		var options = getOptions('pl_repeat');
+		return request(options);
+	};
+	
+	this.fullscreen = function() {
+		var options = getOptions('fullscreen');
+		return request(options);
+	};
+	
+	this.setVolume = function(val) {
+		var options = getOptions('volume&val='+val);
+	    return request(options); 
+	};
 
 }).call(vlcControl);
