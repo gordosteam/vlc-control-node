@@ -9,6 +9,7 @@ var ipServer = '';
 var portServer = 8080;
 var user = '';
 var password = '';
+var net = require('net');
 
 var vlcControl = module.exports = function(config) {
 
@@ -18,14 +19,31 @@ function getOptions(path) {
 	return {
 		host : ipServer,
 		port : portServer,
-		path : '/requests/status.json?command='+ path,
+		path : '/requests/status.json?command=' + path,
 		method : 'GET',
-		auth: user + ':' + password,
+		auth : user + ':' + password,
 		headers : {
 			'Content-Type' : 'application/json'
 		}
 	};
 }
+
+function sendResponse(msg) {
+	var client = net.connect({
+		port : 8124
+	}, function() {//'connect' listener
+		console.log('client connected');
+		client.write(msg);
+	});
+	client.on('data', function(data) {
+		console.log(data.toString());
+		client.end();
+	});
+	client.on('end', function() {
+		console.log('client disconnected');
+	});
+	console.log("success!");
+};
 
 function request(options) {
 	var prot = http;
@@ -42,7 +60,7 @@ function request(options) {
 		res.on('end', function() {
 			try {
 				//console.log(output);
-				return JSON.parse(output);
+				sendResponse(JSON.parse(output));
 			} catch (err) {
 				console.error(err.stack);
 				console.error(options);
@@ -73,103 +91,103 @@ function request(options) {
 			var options = getOptions('in_play&input=' + uri + '&option=novideo');
 		else
 			var options = getOptions('in_play&input=' + uri);
-		return request(options);
+		request(options);
 	};
 
 	this.addToPlaylist = function(uri) {
 		var options = getOptions("in_enqueue&input=" + uri);
-		return request(options);
+		request(options);
 	};
 
 	this.play = function(id) {
 		if (id)
-		  var options = getOptions('pl_play&id=' + id);
+			var options = getOptions('pl_play&id=' + id);
 		else
-		  var options = getOptions('pl_play');
-		return request(options);
+			var options = getOptions('pl_play');
+		request(options);
 	};
 
 	this.pause = function(id) {
 		if (id)
-		  var options = getOptions('pl_pause&id=' + id);
+			var options = getOptions('pl_pause&id=' + id);
 		else
-		  var options = getOptions('pl_pause');
-		return request(options);
+			var options = getOptions('pl_pause');
+		request(options);
 	};
 
 	this.forceResume = function() {
 		var options = getOptions('pl_forceresume');
-		return request(options);
+		request(options);
 	};
 
 	this.forcePause = function() {
 		var options = getOptions('pl_forcepause');
-		return request(options);
+		request(options);
 	};
 
 	this.stop = function() {
 		var options = getOptions('pl_stop');
-		return request(options);
+		request(options);
 	};
 
 	this.next = function() {
 		var options = getOptions('pl_next');
-		return request(options);
+		request(options);
 	};
 
 	this.previous = function() {
 		var options = getOptions('pl_previous');
-		return request(options);
+		request(options);
 	};
 
 	this.delete = function(id) {
 		var options = getOptions('pl_delete&id=' + id);
-		return request(options);
+		request(options);
 	};
-	
+
 	this.empty = function() {
 		var options = getOptions('pl_empty');
-		return request(options);
+		request(options);
 	};
-	
+
 	this.rate = function(rate) {
 		var options = getOptions('rate&val=' + rate);
-		return request(options);
+		request(options);
 	};
-	
+
 	this.aspectRatio = function(ar) {
 		var options = getOptions('aspectratio&val=' + ar);
-		return request(options);
+		request(options);
 	};
-	
-	this.sort = function(id,val) {
-		var options = getOptions('pl_sort&id='+ id + '&val=' + val);
-		return request(options);
+
+	this.sort = function(id, val) {
+		var options = getOptions('pl_sort&id=' + id + '&val=' + val);
+		request(options);
 	};
-	
+
 	this.random = function() {
 		var options = getOptions('pl_random');
-		return request(options);
+		request(options);
 	};
-	
+
 	this.loop = function() {
 		var options = getOptions('pl_loop');
-		return request(options);
+		request(options);
 	};
-	
+
 	this.repeat = function() {
 		var options = getOptions('pl_repeat');
-		return request(options);
+		request(options);
 	};
-	
+
 	this.fullscreen = function() {
 		var options = getOptions('fullscreen');
-		return request(options);
+		request(options);
 	};
-	
+
 	this.setVolume = function(val) {
-		var options = getOptions('volume&val='+val);
-	    return request(options); 
+		var options = getOptions('volume&val=' + val);
+		request(options);
 	};
 
 }).call(vlcControl);
