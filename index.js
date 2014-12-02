@@ -32,17 +32,17 @@ function sendResponse(msg) {
 	var client = net.connect({
 		port : 8124
 	}, function() {//'connect' listener
-		console.log('client connected');
-		client.write(msg);
+		//console.log('client connected');
+		client.write(msg.toString());
 	});
 	client.on('data', function(data) {
-		console.log(data.toString());
+		//console.log(data.toString());
 		client.end();
 	});
 	client.on('end', function() {
-		console.log('client disconnected');
+		//console.log('client disconnected');
 	});
-	console.log("success!");
+	//console.log("success!");
 };
 
 function request(options) {
@@ -60,7 +60,7 @@ function request(options) {
 		res.on('end', function() {
 			try {
 				//console.log(output);
-				sendResponse(JSON.parse(output));
+				sendResponse(output);
 			} catch (err) {
 				console.error(err.stack);
 				console.error(options);
