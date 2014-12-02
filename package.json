@@ -1,7 +1,7 @@
 {
   "name": "vlc-control-node",
-  "version": "0.0.0",
-  "description": "0.0.1",
+  "version": "0.0.1",
+  "description": "Module for Node. JS to control your VLC with a wrapper",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"

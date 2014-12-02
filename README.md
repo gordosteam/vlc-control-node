@@ -3,6 +3,8 @@ vlc-control-node
 
 Module for Node. JS to control your VLC with a wrapper
 
+[![NPM](https://nodei.co/npm/vlc-control-node.png?downloads=true&downloadRank=true)](https://nodei.co/npm/vlc-control-node/)
+
 ## Installation
 TODO: Add to NPM
 ```javascript
