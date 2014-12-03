@@ -10,7 +10,7 @@ http.createServer(function (req, res) {
         
     console.log('server Start!');
     
-    vlccontrol.init({ip:'192.168.1.7', port:8080, user:'', password:'asd123'});
+    vlccontrol.init({ip:'192.168.1.4', port:8080, user:'', password:'asd123'});
     console.log('VLC Control init!');
 	
 	var pquery = querystring.parse(url.parse(req.url).query);
@@ -18,7 +18,7 @@ http.createServer(function (req, res) {
     console.log('receive request!');
 	
 	var msg = null;
-
+	
 	if ( callback === 'play' ) {
 		vlccontrol.play();
 		msg = { msg : " play " };
@@ -35,9 +35,17 @@ http.createServer(function (req, res) {
 		vlccontrol.previous();
 		msg = { msg : " backward " };
 	}
+	if ( callback === 'setVolume' ) {
+		var volume = pquery.volume;
+		
+		vlccontrol.setVolume(volume);
+		msg = { msg : " setVolume ", volume : volume };
+	}
 
 	msg = JSON.stringify(msg);
     console.log('msg : ' + msg);
+    
+    console.log( callback + '(\'' + msg + '\')' );
 	
     res.writeHead(200, {'Content-Type': 'text/plain'});
 
