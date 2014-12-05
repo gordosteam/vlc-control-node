@@ -16,29 +16,21 @@ var vlcControl = module.exports = function(config) {
 };
 
 function getOptions(path) {
-	if (path) {
-		return {
-			host : ipServer,
-			port : portServer,
-			path : '/requests/status.json?command=' + path,
-			method : 'GET',
-			auth : user + ':' + password,
-			headers : {
-				'Content-Type' : 'application/json'
-			}
-		};
-	} else {
-		return {
-			host : ipServer,
-			port : portServer,
-			path : '/requests/status.json',
-			method : 'GET',
-			auth : user + ':' + password,
-			headers : {
-				'Content-Type' : 'application/json'
-			}
-		};
+	var p = '/requests/status.json';
 
+	if ( path ) {
+		p += '?command=' + path;
+	}
+
+	return {
+		host : ipServer,
+		port : portServer,
+		path : p,
+		method : 'GET',
+		auth : user + ':' + password,
+		headers : {
+			'Content-Type' : 'application/json'
+		}
 	}
 }
 
